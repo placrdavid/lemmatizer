@@ -101,25 +101,35 @@ class Lemmatizer
 	end
 
 	def lemma(form, pos = nil)
-    if !pos
-      [:verb, :noun, :adj, :adv].each do |p|
-        result = lemma(form, p)
-        return result unless result == form
-      end
-      return form
-    end    
+		if !pos
+			[:verb, :noun, :adj, :adv].each do |p|
+				result = lemma(form, p)
+				return result unless result == form
+			end
+			if root_in_dict(form)
+			# puts 'its in the dict, return the form as the lemma'
+				return form
+			else
+			#
+				return nil
+			end
+		end    
+		# TODO is this returning the form?
 		each_lemma(form, pos) do |x|
 			return x
 		end
-		return form
+		if root_in_dict(form)
+			return form
+		else
+			return nil
+		end
 	end
   
-	# test to see if a word is in the dictionary
-	def in_dict(word)
+	# test to see if a word root (e.g. walk (not walking) twerk (not twerk) is in the dictionary
+	def root_in_dict(root)
 		[:verb, :noun, :adj, :adv].each do |p|
-			return true unless @wordlists[p][word].nil?
+			return true	 unless @wordlists[p][root].nil?
 		end
 		return false
 	end
-
 end
