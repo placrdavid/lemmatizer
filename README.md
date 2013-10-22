@@ -5,6 +5,9 @@ Lemmatizer for text in English.  Inspired by Python's [nltk.corpus.reader.wordne
 
 Based on code posted by mtbr at his blog entry [WordNet-based lemmatizer](http://d.hatena.ne.jp/mtbr/20090303/prfrnlprubyWordNetbasedlemmatizer)
 
+Forked by David Mountain, to include an 'in_dict' function, to test if a word is included in the dictionary
+
+
 Installation
 ------------
 
@@ -34,6 +37,10 @@ Limitations
     # Lemmatizer leaves alone words that its dictionary does not contain.
 	# This keeps proper names such as "James" intact.
     p lem.lemma("MacBooks", :noun) # => "MacBooks" 
+    
+ 	# This fork of the gem contains an additional function 'in_dict'
+ 	# which checks if the word exists in the dictionary or not.
+ 	# Allows alternative action to be taken if a word cannot be lemmatized
     
 	# If an inflected form is included as a lemma in the word index,
 	# lemmatizer may not give an expected result.
