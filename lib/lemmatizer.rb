@@ -114,4 +114,12 @@ class Lemmatizer
 		return form
 	end
   
+	# test to see if a word is in the dictionary
+	def in_dict(word)
+		[:verb, :noun, :adj, :adv].each do |p|
+			return true unless @wordlists[p][word].nil?
+		end
+		return false
+	end
+
 end
